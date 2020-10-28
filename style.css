@@ -105,8 +105,12 @@ form>input {
     margin: auto;
 }
 
-span {
+.span {
     margin: 24px 0px 8px 0px;
+}
+.highlight {
+    font-size: 1.2rem;
+    color: #D73A49;
 }
 
 input {
@@ -145,7 +149,7 @@ input:hover {
 input:focus {
     border-color: #0366D6;
     outline: 0;
-    box-shadow: 0 0 0px 5px rgba(3, 102, 214, 0.2);
+    box-shadow: 0 0 0px 3.5px rgba(3, 102, 214, 0.2);
 }
 
 form>input:focus {
@@ -165,8 +169,8 @@ form>input:focus {
 }
 
 #info-message,
-#log-message, #error-message {
-    font-size: 1.4rem;
+#log-message, #error-message, #username-error {
+    font-size: 1.2rem;
     margin: 4px 0 0 0;
     opacity: .8;
 }
