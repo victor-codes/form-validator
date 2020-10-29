@@ -6,7 +6,7 @@ const username = document.getElementById('username')
 
 
 function usernameValidator() {
-    let regexTest = /^[\w]+$/gi
+    let regexTest = /^[\w]+$/g
     let numberRegex = /^[\d+/_]/
     let value = username.value
     // let regexTest = /[a-zA-Z0-9]+/gi
@@ -33,7 +33,7 @@ function usernameValidator() {
         })
 
     }
-    else if (value.length < 6 || value.length >= 20) {
+    else if ((value.length < 6 || value.length >= 20)) {
         setTimeout(function () {
             log.innerHTML = 'Username must be between six and 20 characters long.'
             log.style.opacity = '1'
@@ -75,26 +75,6 @@ function usernameValidator() {
         })
 
     }
-    // else if (username) {
-    //     setTimeout(function () {
-
-    //         log.innerHTML = "Username may only contain alphanumeric characters, and cannot begin with a number." //'Please enter a valid username'
-    //         username.style.borderColor = '#D73A49'
-    //         username.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
-
-    //     }, 1000)
-
-    //     username.addEventListener('focusout', function () {
-    //         username.style.boxShadow = 'none'
-    //     })
-
-    //     username.addEventListener('focusin', function () {
-    //         username.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
-    //     })
-    //     log.style.color = '#D73A49'
-    //     log.style.opacity = '1'
-    // }
-
     else if (regex) {
 
         setTimeout(function () {
@@ -116,15 +96,25 @@ function usernameValidator() {
 }
 username.addEventListener('input', usernameValidator)
 
+// let match3 = /[.](?=[a-zA-Z0-9])/
 
-// validate email
+// validate email (\w-)@(\w+)(\w+$)
+let match2 = /^[a-zA-Z][.](?=a-zA-Z)|\w+@\w+.\w+$/
+
+console.log('Ayodejiv5@gmail.com'.match(match2))
 
 function emailValidator() {
-
+    
     //Email is invalid or already taken
     var log = document.getElementById('info-message')
     var test = email.value
-    // switch(test){
+    
+    let match = /^[a-zA-Z]/
+    let match1 = /[^\w-@.]/g
+    let match2 = /^[a-zA-Z][.](?=a-zA-Z)|\w+@\w+.\w+$/
+    let match3 = /[.](?=[.])/
+    // let match = /^[\d/_/-]/
+    
     if (test.length < 1) {
         setTimeout(function () {
 
@@ -138,6 +128,93 @@ function emailValidator() {
 
 
         email.addEventListener('focusout', function () {
+            email.style.boxShadow = 'none' 
+        })
+
+        email.addEventListener('focusin', function () { 
+            email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
+        })
+
+    }
+
+    // else if (!(test.match(match)) || (test.match(match1) || test.match(match3)) || test.match(/[.]$/)) { //|| match3.test(test)
+
+    //     setTimeout(function () {
+
+    //         log.innerHTML = 'Email is invalid or already taken'
+    //         log.style.opacity = '1'
+    //         email.style.borderColor = '#D73A49'
+    //         email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
+    //         log.style.color = '#D73A49'
+
+    //     }, 500)
+
+
+    //     email.addEventListener('focusout', function () {
+    //         email.style.boxShadow = 'none'
+    //     })
+
+    //     email.addEventListener('focusin', function () {
+    //         email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
+    //     })
+
+    // }
+    // if (!(test.match(/@/)))
+    // else {
+
+    //     setTimeout(function () {
+
+    //         log.innerHTML = `Please include "@" in the email address '${test}' is missing an '@'`
+    //         log.style.opacity = '1'
+    //         email.style.borderColor = '#D73A49'
+    //         email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
+    //         log.style.color = '#D73A49'
+
+    //     }, 1000)
+
+
+    //     email.addEventListener('focusout', function () {
+    //         email.style.boxShadow = 'none'
+    //     })
+
+    //     email.addEventListener('focusin', function () {
+    //         email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
+    //     })
+
+    // }
+
+    else if (test.match(match2)) {
+
+        setTimeout(function () {
+            log.innerHTML = ''
+            email.style.borderColor = '#85e89d'
+            email.style.boxShadow = '0 0 0px 3.5px rgba(133, 232, 157, 0.2)'
+
+        }, 1000)
+
+        email.addEventListener('focusout', function () {
+            email.style.boxShadow = 'none'
+        })
+
+        email.addEventListener('focusin', function () {
+            email.style.boxShadow = '0 0 0px 3.5px rgba(133, 232, 157, 0.2)'
+        })
+    }
+
+    else {
+
+        setTimeout(function () {
+
+            log.innerHTML = "Email is invalid or already taken"  //`Please include "@" in the email address '${test}' is missing an '@'`
+            log.style.opacity = '1'
+            email.style.borderColor = '#D73A49'
+            email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
+            log.style.color = '#D73A49'
+
+        },  1000)
+
+
+        email.addEventListener('focusout', function () {
             email.style.boxShadow = 'none'
         })
 
@@ -146,7 +223,6 @@ function emailValidator() {
         })
 
     }
-
 
 }
 
@@ -305,7 +381,7 @@ function checkPassword() {
         cpassword.addEventListener('focusin', function () {
             cpassword.style.boxShadow = '0 0 0px 3.5px rgba(133, 232, 157, 0.2)'
         })
-        
+
     }
     // else if (checkpassword.value.length < 1) {
     //     console.log("I get overwhelemed")
@@ -323,11 +399,13 @@ function checkPassword1() {
     var log = document.getElementById('error-message')
     if (password.value !== checkpassword.value) { //&& password.value.length > 0 && cpassword.value.length > 0
         // cpassword.addEventListener('focusout', function () {
-        // setTimeout(function () {
-        log.innerHTML = 'password does not correspond'
-        cpassword.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
+        setTimeout(function () {
+        log.innerHTML = 'Password does not match.'
+        log.style.color = '#D73A49'
+        log.style.opacity = '1'
+        // cpassword.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
         cpassword.style.borderColor = '#D73A49'
-        // }, 100)
+        }, 1000)
         // })
         // cpassword.addEventListener('focusout', function () {
         // })
