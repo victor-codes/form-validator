@@ -131,9 +131,11 @@ input[placeholder] {
 
 #submit {
     margin-top: 32px;
-    background: rgb(64, 124, 255);
+    background: rgb(178, 181, 186);
+    /* background: rgb(64, 124, 255); */
     font-weight: medium;
-    color: white;
+    color: black;
+    /* color: white; */
     width: 100%;
     font-size: 1.4rem;
     text-transform: uppercase;
@@ -160,13 +162,14 @@ form>input:focus {
 }
 
 #submit:hover {
-    background: rgb(64, 120, 241);
-    cursor: pointer;
+    /* background: rgb(64, 120, 241); */
+    cursor: not-allowed;
+    /* cursor: pointer; */
 }
 
-#submit:active {
+/* #submit:active {
     background: rgb(53, 108, 226);
-}
+} */
 
 #info-message,
 #log-message, #error-message, #username-error {
