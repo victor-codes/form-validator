@@ -96,12 +96,9 @@ function usernameValidator() {
 }
 username.addEventListener('input', usernameValidator)
 
-// let match3 = /[.](?=[a-zA-Z0-9])/
 
 // validate email (\w-)@(\w+)(\w+$)
-let match2 = /^[a-zA-Z][.](?=a-zA-Z)|\w+@\w+.\w+$/
 
-console.log('Ayodejiv5@gmail.com'.match(match2))
 
 function emailValidator() {
     
@@ -109,11 +106,10 @@ function emailValidator() {
     var log = document.getElementById('info-message')
     var test = email.value
     
-    let match = /^[a-zA-Z]/
-    let match1 = /[^\w-@.]/g
-    let match2 = /^[a-zA-Z][.](?=a-zA-Z)|\w+@\w+.\w+$/
-    let match3 = /[.](?=[.])/
-    // let match = /^[\d/_/-]/
+    // let match = /^[a-zA-Z]/
+    // let match1 = /[^\w-@.]/g
+    let match = /^[a-zA-Z][.](?=a-zA-Z)|\w+@([\w-]+\.)+[\w-]{2,4}$/
+    // let match3 = /[.](?=[.])/
     
     if (test.length < 1) {
         setTimeout(function () {
@@ -137,53 +133,7 @@ function emailValidator() {
 
     }
 
-    // else if (!(test.match(match)) || (test.match(match1) || test.match(match3)) || test.match(/[.]$/)) { //|| match3.test(test)
-
-    //     setTimeout(function () {
-
-    //         log.innerHTML = 'Email is invalid or already taken'
-    //         log.style.opacity = '1'
-    //         email.style.borderColor = '#D73A49'
-    //         email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
-    //         log.style.color = '#D73A49'
-
-    //     }, 500)
-
-
-    //     email.addEventListener('focusout', function () {
-    //         email.style.boxShadow = 'none'
-    //     })
-
-    //     email.addEventListener('focusin', function () {
-    //         email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
-    //     })
-
-    // }
-    // if (!(test.match(/@/)))
-    // else {
-
-    //     setTimeout(function () {
-
-    //         log.innerHTML = `Please include "@" in the email address '${test}' is missing an '@'`
-    //         log.style.opacity = '1'
-    //         email.style.borderColor = '#D73A49'
-    //         email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
-    //         log.style.color = '#D73A49'
-
-    //     }, 1000)
-
-
-    //     email.addEventListener('focusout', function () {
-    //         email.style.boxShadow = 'none'
-    //     })
-
-    //     email.addEventListener('focusin', function () {
-    //         email.style.boxShadow = '0 0 0px 3.5px rgba(215, 58, 73, 0.2)'
-    //     })
-
-    // }
-
-    else if (test.match(match2)) {
+    else if (test.match(match)) {
 
         setTimeout(function () {
             log.innerHTML = ''
