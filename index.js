@@ -3,13 +3,13 @@ const password = document.getElementById('password')
 const checkpassword = document.getElementById('cpassword')
 const username = document.getElementById('username')
 
-function errorMessage (label, log, message) { 
+function errorMessage(label, log, message) {
     log.innerHTML = message
     label.style.borderColor = '#D73A49'
     log.style.color = '#D73A49'
     log.style.opacity = '1'
 }
-function successMessage (label, log) {
+function successMessage(label, log) {
     log.innerHTML = ''
     label.style.borderColor = '#85e89d'
 }
@@ -23,7 +23,7 @@ function usernameValidator() {
 
     if (value.length <= 0) {
         setTimeout(function () {
-            errorMessage(username, log, "Username can't be blank")
+            errorMessage(username, log, "Username can't be blank.")
         }, 800)
     }
     else if ((value.length < 6 || value.length >= 20)) {
@@ -55,12 +55,12 @@ function emailValidator() {
     let match = /^[a-zA-Z][.](?=a-zA-Z)|\w+@([\w-]+\.)+[\w-]{2,4}$/
     if (test.length < 1) {
         setTimeout(function () {
-            errorMessage(email, log, 'Enter a valid email')
+            errorMessage(email, log, 'Enter a valid email.')
         }, 800)
     }
     else if (test.match(/\s/g)) {
         setTimeout(function () {
-            errorMessage(email, log, "Email is invalid or already taken")
+            errorMessage(email, log, "Email is invalid or already taken.")
         }, 800)
     }
     else if (test.match(match)) {
@@ -72,7 +72,7 @@ function emailValidator() {
 
     else {
         setTimeout(function () {
-            errorMessage(email, log, "Email is invalid or already taken")
+            errorMessage(email, log, "Email is invalid or already taken.")
         }, 800)
     }
 
@@ -149,7 +149,7 @@ function passwordValidator() {
     }
     else if ((length >= 8) && (value.match(/((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,20})/g))) { //^[\w]+[\w]$
         setTimeout(function () {
-            successMessage(password,log)
+            successMessage(password, log)
 
         }, 800)
     }
@@ -190,8 +190,40 @@ password.addEventListener('input', passwordValidator)
 checkpassword.addEventListener('input', checkPassword)
 checkpassword.addEventListener('focusout', checkPassword1)
 
-// to prevent the submit to perform default operation
 
-// document.getElementById('submit').addEventListener('click', function (e) {
-//     e.preventDefault()
-// })
+function checkState() {
+    let submitlabel = document.getElementById('submit')
+    if (username.value != '' && email.value != '' && password.value != '' && checkpassword.value != '') {
+        submitlabel.style.background = 'rgb(64, 124, 255)'
+        submitlabel.style.color = 'white'
+        submitlabel.style.cursor = 'pointer'
+        // submitlabel.style.active = submitlabel.style.background = 'rgb(53, 108, 226)'
+        submitlabel.addEventListener('mouseover', function () {
+            submitlabel.style.background = 'rgb(64, 120, 241)'
+        })
+        submitlabel.addEventListener('mouseout', function () {
+            submitlabel.style.background = 'rgb(64, 124, 255)'
+        })
+        submitlabel.addEventListener('mousedown', function () {
+            submitlabel.style.background = 'rgb(53, 108, 226)'
+        })
+    }
+}
+setInterval(checkState, 1000)
+// to prevent the submit to perform default operation
+function submitButton() {
+    usernameValidator()
+    emailValidator()
+    passwordValidator()
+    checkPassword1()
+    checkPassword()
+}
+
+// submitButton()
+document.getElementById('submit').addEventListener('click', function (e) {
+    e.preventDefault()
+    if (document.getElementById('submit').style.background === 'rgb(64, 124, 255)') {
+        submitButton()
+        alert(`Ahahaaha, it's running`)
+    }
+})
