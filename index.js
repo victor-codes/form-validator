@@ -5,13 +5,14 @@ const username = document.getElementById('username')
 
 function errorMessage(label, log, message) {
     log.innerHTML = message
-    label.style.borderColor = '#D73A49'
-    log.style.color = '#D73A49'
-    log.style.opacity = '1'
+    log.classList.add('errorMessage')
+    label.classList.add('error')
+    label.classList.remove('success')
 }
 function successMessage(label, log) {
     log.innerHTML = ''
-    label.style.borderColor = '#85e89d'
+    label.classList.add('success')
+    label.classList.remove('error')
 }
 
 function usernameValidator() {
@@ -48,28 +49,21 @@ username.addEventListener('input', usernameValidator)
 // validate email (\w-)@(\w+)(\w+$)
 
 function emailValidator() {
-    //Email is invalid or already taken
-
     var log = document.getElementById('info-message')
     var test = email.value.trim()
-    let match = /^[a-zA-Z][.](?=a-zA-Z)|\w+@([\w-]+\.)+[\w-]{2,4}$/
+    const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let match = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (test.length < 1) {
         setTimeout(function () {
             errorMessage(email, log, 'Enter a valid email.')
         }, 800)
     }
     else if (test.match(/\s/g)) {
-        setTimeout(function () {
-            errorMessage(email, log, "Email is invalid or already taken.")
-        }, 800)
+        setTimeout(function () { errorMessage(email, log, "Email is invalid or already taken.") }, 800)
     }
     else if (test.match(match)) {
-
-        setTimeout(function () {
-            successMessage(email, log)
-        }, 800)
+        setTimeout(function () { successMessage(email, log) }, 800)
     }
-
     else {
         setTimeout(function () {
             errorMessage(email, log, "Email is invalid or already taken.")
@@ -194,19 +188,8 @@ checkpassword.addEventListener('focusout', checkPassword1)
 function checkState() {
     let submitlabel = document.getElementById('submit')
     if (username.value != '' && email.value != '' && password.value != '' && checkpassword.value != '') {
-        submitlabel.style.background = 'rgb(64, 124, 255)'
-        submitlabel.style.color = 'white'
-        submitlabel.style.cursor = 'pointer'
-        // submitlabel.style.active = submitlabel.style.background = 'rgb(53, 108, 226)'
-        submitlabel.addEventListener('mouseover', function () {
-            submitlabel.style.background = 'rgb(64, 120, 241)'
-        })
-        submitlabel.addEventListener('mouseout', function () {
-            submitlabel.style.background = 'rgb(64, 124, 255)'
-        })
-        submitlabel.addEventListener('mousedown', function () {
-            submitlabel.style.background = 'rgb(53, 108, 226)'
-        })
+        submitlabel.classList.add("default")
+        submit.disabled = false
     }
 }
 setInterval(checkState, 1000)
@@ -218,11 +201,13 @@ function submitButton() {
     checkPassword1()
     checkPassword()
 }
+const submit = document.getElementById('submit')
+submit.disabled = true
 
 // submitButton()
-document.getElementById('submit').addEventListener('click', function (e) {
+submit.addEventListener('click', function (e) {
     e.preventDefault()
-    if (document.getElementById('submit').style.background === 'rgb(64, 124, 255)') {
+    if (submit.style.background === 'rgb(64, 124, 255)') {
         submitButton()
         alert(`Ahahaaha, it's running`)
     }
